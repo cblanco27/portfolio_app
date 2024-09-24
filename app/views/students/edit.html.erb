@@ -8,3 +8,8 @@
   <%= link_to "Show this student", @student %> |
   <%= link_to "Back to students", students_path %>
 </div>
+
+<div>
+    <%= form.label :profile_pic, style: "display: block" %>
+    <%= form.file_field :profile_pic %>
+  </div>
