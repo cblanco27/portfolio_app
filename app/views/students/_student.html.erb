@@ -31,9 +31,9 @@
 
   <div>
   <% if student.profile_pic.present? %>
-        <%= image_tag student.profile_pic %>
+        <%= image_tag student.profile_pic.variant(resize_to_limit: [150,nil]) %>
     <% else %>
-      <%= image_tag src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" %>
+      <%= image_tag src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" , size: "150x150" %>
   <% end %>
   </div>
 </div>
