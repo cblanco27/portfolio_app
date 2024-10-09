@@ -26,7 +26,7 @@
     <%= form.text_field :school_email %>
   </div>
 
-  <div>
+  <div> <!-- Allows you to select a major instead of a fill in the blank -->
     <%= form.label :major, style: "display: block" %>
     <%= form.select :major, options_for_select(Student::VALID_MAJORS), {prompt: "Select a Major"}, class: "form-control"%>
   </div>
