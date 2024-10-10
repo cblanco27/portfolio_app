@@ -4,10 +4,30 @@ class StudentsController < ApplicationController
   # GET /students or /students.json
   def index
     @search_params = params[:search] || {}
-    @students = Student.all
+    
 
-    if @search_params[:major].present?
-      @students = @students.where(major: @search_params[:major])
+    if @search_params.present?
+      @students = Student.all
+
+      if @search_params[:major].present?
+        @students = @students.where(major: @search_params[:major])
+      end
+
+      #Allows user input to filter by major, graduation date before or after, or by both types. M04
+      if @search_params[:expected_graduation_date].present? && @search_params[:graduation_date_select].present?
+        date = Date.parse(@search_params[:expected_graduation_date])
+        if @search_params[:graduation_date_select] == "Before"
+          @students = @students.where(graduation_date: ...date)
+        elsif  @search_params[:graduation_date_select] == "After"
+          @students = @students.where(graduation_date: date...)
+        end
+      end
+
+      @students
+    #returns nothing if no search parameters are entered M04
+    else
+      @students = Student.none
+
     end
   end
 

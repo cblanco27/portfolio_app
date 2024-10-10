@@ -5,6 +5,16 @@
  </div>
 
  <div>
+    <%= form.label :expected_graduation_date, style: "display: block" %>
+    <%= form.date_field :expected_graduation_date, name: 'search[expected_graduation_date]'%>
+  </div>
+
+<div>
+   <%= form.label :graduation_date_select, "Select Graduation Date", class: "form-label" %>
+   <%= form.select :graduation_date_select, options_for_select(["Before", "After"]), { prompt: "Select Option" }, name: 'search[graduation_date_select]', class: "form-control" %>
+ </div>
+
+ <div>
    <%= form.submit "Search", class: "btn btn-primary" %>
  </div>
 <% end %>
