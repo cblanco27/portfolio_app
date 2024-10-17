@@ -25,9 +25,10 @@ class StudentsController < ApplicationController
       end
 
       @students
-    #returns nothing if no search parameters are entered M04
+    #allows the show all button to work 
     elsif !!params[:show_all] == true
       @students = Student.all
+    #returns nothing if no search parameters are entered M04
     else
       @students = Student.none
 
