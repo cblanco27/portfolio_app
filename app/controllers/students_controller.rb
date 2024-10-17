@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   def index
     @search_params = params[:search] || {}
     
-
+    
     if @search_params.present?
       @students = Student.all
 
@@ -14,17 +14,20 @@ class StudentsController < ApplicationController
       end
 
       #Allows user input to filter by major, graduation date before or after, or by both types. M04
+      
       if @search_params[:expected_graduation_date].present? && @search_params[:graduation_date_select].present?
         date = Date.parse(@search_params[:expected_graduation_date])
         if @search_params[:graduation_date_select] == "Before"
           @students = @students.where(graduation_date: ...date)
         elsif  @search_params[:graduation_date_select] == "After"
           @students = @students.where(graduation_date: date...)
-        end
+        end #.. covers a range, being placed before date allows range before date, after gives range after 3 ... means inclusive
       end
 
       @students
     #returns nothing if no search parameters are entered M04
+    elsif !!params[:show_all] == true
+      @students = Student.all
     else
       @students = Student.none
 

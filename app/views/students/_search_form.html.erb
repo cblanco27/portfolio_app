@@ -1,20 +1,20 @@
 <%= form_with(url: students_path, method: :get, local: true, class: "form-inline") do |form| %>
- <div>
+ <div> <!-- creation of selection of major for search params -->
    <%= form.label :major, "Select Major", class: "form-label" %>
    <%= form.select :major, options_for_select(Student::VALID_MAJORS), { prompt: "Any Major" }, name: 'search[major]', class: "form-control" %>
  </div>
 
- <div>
+ <div> <!-- creates expected_graduation_date for rspec testing, and allows you to start narrowing down range -->
     <%= form.label :expected_graduation_date, style: "display: block" %>
     <%= form.date_field :expected_graduation_date, name: 'search[expected_graduation_date]'%>
   </div>
 
-<div>
+<div> <!-- Creates the dropdown menu for before or after for searching students -->
    <%= form.label :graduation_date_select, "Select Graduation Date", class: "form-label" %>
    <%= form.select :graduation_date_select, options_for_select(["Before", "After"]), { prompt: "Select Option" }, name: 'search[graduation_date_select]', class: "form-control" %>
  </div>
 
  <div>
-   <%= form.submit "Search", class: "btn btn-primary" %>
+   <%= form.submit "Search", class: "btn btn-primary btn-sm m-1"%>
  </div>
 <% end %>
