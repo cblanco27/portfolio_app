@@ -8,16 +8,20 @@ class StudentsController < ApplicationController
     
     if @search_params.present?
       @students = Student.all
+      
+      if params[:major] == "" && params[:expected_graduation_date] == "" && params[:graduation_date_select] == ""
+        flash[:alert] = "Please enter search criteria to find students"
+        render index
+      end
 
       if @search_params[:major].present?
         @students = @students.where(major: @search_params[:major])
       end
 
       #Allows user input to filter by major, graduation date before or after, or by both types. M04
-      
       if @search_params[:expected_graduation_date].present? && @search_params[:graduation_date_select].present?
         date = Date.parse(@search_params[:expected_graduation_date])
-        if @search_params[:graduation_date_select] == "Before"
+        if @search_params[:graduation_date_select] == "Before"  
           @students = @students.where(graduation_date: ...date)
         elsif  @search_params[:graduation_date_select] == "After"
           @students = @students.where(graduation_date: date...)
@@ -28,10 +32,9 @@ class StudentsController < ApplicationController
     #allows the show all button to work 
     elsif !!params[:show_all] == true
       @students = Student.all
-    #returns nothing if no search parameters are entered M04
+      #returns nothing if no search parameters are entered M04
     else
       @students = Student.none
-
     end
   end
 

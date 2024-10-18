@@ -2,16 +2,7 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Students</h1>
-<!--  
-<div id="students">
-  <% @students.each do |student| %>
-    <%= render student %>
-    <p>
-      <%= link_to "Show this student", student %>
-    </p>
-  <% end %>
-</div>
--->
+
 <!-- creates a table to present the required information for the user story -->
 <%if @students.present?%>
 <table class="table table-bordered table-striped">
