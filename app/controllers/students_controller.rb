@@ -7,12 +7,18 @@ class StudentsController < ApplicationController
     
     
     if @search_params.present?
-      @students = Student.all
-      
-      if params[:major] == "" && params[:expected_graduation_date] == "" && params[:graduation_date_select] == ""
-        flash[:alert] = "Please enter search criteria to find students"
-        render index
+
+      #Added to cover a sad path test, where no search params are given. 
+      if params[:search].nil? || (params[:search][:major] == "" && params[:search][:expected_graduation_date] == "" && params[:search][:graduation_date_select] == "")
+        flash[:notice] = "Please enter search criteria to find students"
+        @students = Student.none
+        # rendering index to tell the controller to re-render the index page
+        render :index
+        # added return to make sure that it does not continue going through the logic
+        return
       end
+
+      @students = Student.all
 
       if @search_params[:major].present?
         @students = @students.where(major: @search_params[:major])
@@ -39,7 +45,13 @@ class StudentsController < ApplicationController
   end
 
   # GET /students/1 or /students/1.json
-  def show
+  def show #added logic to be able to find a student using their ID in the db, for rspec testing
+    @student = Student.find_by(id: params[:id])
+    if @student
+      render :show
+    else #return a 404 error if student is not found via ID
+      render json: { error: "Student not found" }, status: :not_found 
+    end
   end
 
   # GET /students/new

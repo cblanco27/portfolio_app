@@ -1,6 +1,12 @@
 <div class='w-75'>
 <p style="color: green"><%= notice %></p>
 
+<%# added this as an example for <%# comments %>
+<%# added flash error for rspec testing %>
+<% if flash[:notice] %>
+  <div class="alert alert-warning"><%= flash[:notice]%> </div>
+<%end%>
+
 <h1>Students</h1>
 
 <!-- creates a table to present the required information for the user story -->
