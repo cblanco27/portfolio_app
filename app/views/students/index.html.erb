@@ -11,7 +11,8 @@
 
 <!-- creates a table to present the required information for the user story -->
 <%if @students.present?%>
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped" aria-label="List of students and their information"> 
+<caption class="visually-hidden">Table listing students' first names, last names, majors, and graduation dates, along with action buttons for each student.</caption>
   <thead>
     <tr> <!-- creates the headings for the table head -->
       <th scope="col">First Name</th>
@@ -30,9 +31,9 @@
         <td><%= student.graduation_date %></td>
         <td>
           <div class="d-flex flex-row justify-content-center"> <!-- creates buttons to show, edit and delete student paths -->
-            <%= link_to 'Show', student_path(student), class: "btn btn-primary btn-sm m-1"%>
-            <%= link_to 'Edit', edit_student_path(student), class: "btn btn-secondary btn-sm m-1"%>
-            <%= button_to 'Delete', student_path(student), method: :delete, class: "btn btn-danger btn-sm m-1"%>
+            <%= link_to 'Show', student_path(student), class: "btn btn-primary btn-sm m-1", aria: { label: "Show details for #{student.first_name} #{student.last_name}" }%>
+            <%= link_to 'Edit', edit_student_path(student), class: "btn btn-secondary btn-sm m-1", aria: { label: "Edit details of #{student.first_name} #{student.last_name}" }%>
+            <%= button_to 'Delete', student_path(student), method: :delete, class: "btn btn-danger btn-sm m-1", aria: { label: "Delete student #{student.first_name} #{student.last_name}" }%>
           </div>
         </td>
 
