@@ -25,6 +25,14 @@
        <li><a class="dropdown-item" href="#">Something else here</a></li>
      </ul>
    </div> 
+
+  <% if student_signed_in? %>
+    <%= button_to "Sign Out", destroy_student_session_path, method: :delete %>
+  <% else %>
+    <%= link_to 'Sign In', new_student_session_path %>
+    <%= link_to 'Sign Up', new_student_registration_path %>
+  <% end %>
+
    <%= yield %>
  </body>
 </html>

@@ -8,6 +8,13 @@ class Student < ApplicationRecord
   validates :major, presence: true
   validates :graduation_date, presence:true
   has_one_attached :profile_pic
+  validate :email_format
+  def email_format
+      unless email =~ /\A[\w+\-.]+@msudenver\.edu\z/i
+          errors.add(:email, "must be an @msudenver.edu email address")
+      end
+  end
+
 
   #Creates array of accepted majors for selection
   VALID_MAJORS = ["Computer Engineering BS", "Computer Information Systems BS", "Computer Science BS", "Cybersecurity", "Data Science and Machine Learning Major"]
